@@ -60,13 +60,14 @@
        ```
     8. `kubectl get pods --all-namespaces` should show all pods as `Running`
     9. Reboot all nodes for good measure.
-8. Run the Sonobuoy conformance test
+8. Run the [Sonobuoy](https://github.com/vmware-tanzu/sonobuoy) conformance test
+    0. NOTE: If this exits within a couple minutes, it most likely timed out connecting to the API or looking up a name in CoreDNS. 
     1. Start the tests. They take awhile:`sonobuoy run --wait`
     2. Watch the logs in another window: `kubectl logs sonobuoy --namespace sonobuoy -f`
     3. Get the results: `results=$(sonobuoy retrieve)`
     4. View the results: `sonobuoy results $results`
     5. Delete the tests: `sonobuoy delete --wait`
-9. Run the kube-bench security conformance tests
+9. Run the [kube-bench](https://github.com/aquasecurity/kube-bench) security conformance tests
     1. `kubectl apply -f https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job.yaml`
     2. Wait until `kubectl get pods | grep kube-bench` shows `Completed`
     3. `kubectl logs kube-bench-xxxxx | less`
