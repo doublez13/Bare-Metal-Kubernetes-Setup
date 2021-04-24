@@ -34,7 +34,7 @@
     4. Change the IPs and hostnames of the clones
     5. Verify `/sys/class/dmi/id/product_uuid` is uniqe on every host
 7. Initialize Kubernetes cluster
-    1. `kubeadm init --config provision.yml --upload-certs` on a to-be master
+    1. `kubeadm init --config provision.yaml --upload-certs` on a to-be master
     2. Copy the kubeconfig to the correct user account
     3. Install network addon. I used Flannel:
         1. `kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml`
