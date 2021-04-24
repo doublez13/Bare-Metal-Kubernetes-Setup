@@ -38,17 +38,21 @@
     2. Copy the kubeconfig to the correct user account
     3. Install network addon. I used Flannel:
         1. `kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml`
-    4. `kubectl get nodes` should now show `Ready`
-    5. Join the other master nodes
+    4. `kubectl get nodes` should now show the new master node as `Ready`
+        ```
+        NAME      STATUS   ROLES                  AGE   VERSION
+        node-01   Ready    control-plane,master   1h   v1.20.5
+        ```
+    6. Join the other master nodes
         1. On the already-running master
            1. `kubeadm init phase upload-certs --upload-certs`
            2. `kubeadm token create --print-join-command`
         3. Paste the join command with `--control-plane --certificate-key xxxx` appended, on each to-be master
         4. Approve the CSRs for the new nodes `kubectl get csr` and then `kubectl certificate approve <name>`
-    6. Join the other worker nodes
+    7. Join the other worker nodes
         1. `kubeadm token create --print-join-command`
         2. Approve the CSRs for the new nodes `kubectl get csr` and then `kubectl certificate approve <name>`
-    7. `kubectl get nodes` should now show all nodes as `Ready`
+    8. `kubectl get nodes` should now show all nodes as `Ready`
        ```
        NAME      STATUS   ROLES                  AGE   VERSION
        node-01   Ready    control-plane,master   23h   v1.20.5
