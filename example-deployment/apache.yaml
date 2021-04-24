@@ -1,0 +1,56 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minimal-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/issuer: "letsencrypt-staging"
+spec:
+  tls:
+  - hosts:
+    - HOST_NAME_HERE
+    secretName: minimal-ingress-tls
+  rules:
+  - host: "HOST_NAME_HERE"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: apache-test
+            port:
+              number: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apache-test
+spec:
+  selector:
+    matchLabels:
+      run: apache-test
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: apache-test
+    spec:
+      containers:
+      - name: apache-test
+        image: httpd
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: apache-test
+  labels:
+    run: apache-test
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    run: apache-test
