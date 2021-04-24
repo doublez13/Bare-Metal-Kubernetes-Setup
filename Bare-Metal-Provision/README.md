@@ -48,7 +48,9 @@
            1. `kubeadm init phase upload-certs --upload-certs`
            2. `kubeadm token create --print-join-command`
         3. Paste the join command with `--control-plane --certificate-key xxxx` appended, on each to-be master
-        4. Approve the CSRs for the new nodes `kubectl get csr` and then `kubectl certificate approve <name>`
+        4. Approve the CSRs for the new nodes.
+           1. `kubectl get csr`
+           2. `kubectl certificate approve <name>`
     7. Join the other worker nodes
         1. `kubeadm token create --print-join-command`
         2. Approve the CSRs for the new nodes `kubectl get csr` and then `kubectl certificate approve <name>`
