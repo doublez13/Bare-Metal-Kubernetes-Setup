@@ -9,22 +9,23 @@
 2. Install container runtime
     1. Add Docker repo
     2. Install containerd
-3. As of 1.21, Kubernetes uses the `systemd` cgroup driver by default, but containerd still needs to be set to use it.
-    ```
-     [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
-       SystemdCgroup = true
-    ```
-4. Make sure the required modules load on boot
+    3. As of 1.21, Kubernetes uses the `systemd` cgroup driver by default, but containerd still needs to be set to use it.
+        ```
+         [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+           SystemdCgroup = true
+        ```
+3. Make sure the required modules load on boot
     1. `overlay`
     2. `br_netfilter`
-5. Set sysctl parameters
+4. Set sysctl parameters
     1. `net.bridge.bridge-nf-call-iptables  = 1`
     2. `net.ipv4.ip_forward                 = 1`
     3. `net.bridge.bridge-nf-call-ip6tables = 1`
-6. Add Kubernetes Repo
-7. Install Kubernetes packages
-    1. `kubelet` `kubeadm` `kubectl`
-8. Clone the VM
+5. Install Kubernetes packages
+    1. `kubelet`
+    2. `kubeadm`
+    3. `kubectl`
+6. Clone the VM
     1. Remove SSH keys.
         1. `rm /etc/ssh/ssh_host*`
     2. Shutdown system and clone
@@ -32,7 +33,7 @@
         1. `dpkg-reconfigure openssh-server`
     4. Change the IPs and hostnames of the clones
     5. Verify `/sys/class/dmi/id/product_uuid` is uniqe on every host
-9. Initialize Kubernetes cluster
+7. Initialize Kubernetes cluster
     1. `kubeadm init --config provision.yml --upload-certs` on a to-be master
     2. Copy the kubeconfig to the correct user account
     3. Install network addon. I used Flannel:
@@ -59,13 +60,13 @@
        ```
     8. `kubectl get pods --all-namespaces` should show all pods as `Running`
     9. Reboot all nodes for good measure.
-10. Run the Sonobuoy conformance test
+8. Run the Sonobuoy conformance test
     1. Start the tests. They take awhile:`sonobuoy run --wait`
     2. Watch the logs in another window: `kubectl logs sonobuoy --namespace sonobuoy -f`
     3. Get the results: `results=$(sonobuoy retrieve)`
     4. View the results: `sonobuoy results $results`
     5. Delete the tests: `sonobuoy delete --wait`
-11. Run the kube-bench security conformance tests
+9. Run the kube-bench security conformance tests
     1. `kubectl apply -f https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job.yaml`
     2. Wait until `kubectl get pods | grep kube-bench` shows `Completed`
     3. `kubectl logs kube-bench-xxxxx | less`
