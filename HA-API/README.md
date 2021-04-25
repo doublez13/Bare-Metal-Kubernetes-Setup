@@ -1,5 +1,5 @@
 # Affinity
-In this configuration, we have three groups of nodes: `Masters`, `Workers`, and `Master APIs`. Some thought should be put into keeping members of the same group apart from each other. For example, if hosting on a vSphere cluster, affinity rules can be created that force the VMs in the same group to run on different hosts.
+In this configuration, we have three groups of nodes: `Masters`, `Workers`, and `Master APIs`. Some thought should be put into keeping members of the same group apart from each other on the underlying infrastructure. For example, if hosting on a vSphere cluster, affinity rules can be created that force the VMs in the same group to run on different hosts.
 
 # API Endpoint High Availability
 
