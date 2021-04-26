@@ -1,8 +1,13 @@
 # Bare Metal Kubernetes Cluster Setup
+
+This is a very basic setup (with example configs) for setting up a bare metal Kubernetes cluster. This is really just an organized collection of my notes and configs, but others can use these as a starting point. 
 ![alt text](src/Bare-Metal-Kube.png)
 
-## Overview
-This is a very basic setup (with example configs) for setting up a bare metal Kubernetes cluster. This is really just an organized collection of my notes and configs, but others can use these as a starting point. 
+## [Configuring API High Availability](HA-API)
+## [Provisioning a Bare Metal Cluster](Bare-Metal-Provision)
+## [Configuring a Bare Metal Load Balancer](MetalLB)
+## [Configuring an Ingress Controller with SSL](NGINX-ingress)
+## [Configuring the Kubernetes Dashboard with Metrics](Dashboard)
 
 ## Components
 1. [Keepalived](https://www.keepalived.org/): VRRP Software for high-availability
@@ -13,9 +18,4 @@ This is a very basic setup (with example configs) for setting up a bare metal Ku
 6. [Dashboard](https://github.com/kubernetes/dashboard): Official web UI for Kubernetes clusters
 7. [Metrics Server](https://github.com/kubernetes-sigs/metrics-server): Provides resource usage data
 
-## Guides
-1. [Configuring API High Availability](HA-API)
-2. [Provisioning a Bare Metal Cluster](Bare-Metal-Provision)
-3. [Configuring a Bare Metal Load Balancer](MetalLB)
-4. [Configuring an Ingress Controller with SSL](NGINX-ingress)
-5. [Configuring the Kubernetes Dashboard with Metrics](Dashboard)
+
