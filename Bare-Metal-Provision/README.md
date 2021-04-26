@@ -30,6 +30,8 @@ Add the following parameters to a conf file in `/etc/sysctl.d`. Ex: `/etc/sysctl
 2. `net.ipv4.ip_forward                 = 1`
 3. `net.bridge.bridge-nf-call-ip6tables = 1`
 
+Load the new paramters with `sysctl --system`
+
 ## Install Kubernetes packages
 1. `kubelet`
 2. `kubeadm`
