@@ -10,7 +10,8 @@ This section provisions a fresh Kubernetes cluster using [Kubeadm](https://kuber
     2. Create iptables rules, and set them to load on boot (the `iptables.up.rules` file)
 
 ## Install container runtime
-1. Add Docker repo
+As the [Dockershim CRI is now deprecated](https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/), containerd is a good choice to use.
+1. Add the [Docker repo](https://docs.docker.com/engine/install/) (provides the containerd packages)
 2. Install containerd
 3. As of 1.21, Kubernetes uses the `systemd` cgroup driver by default, but containerd still needs to be set to use it.
     ```
