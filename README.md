@@ -3,7 +3,7 @@
 This is a very basic setup (with example configs) for setting up a bare metal Kubernetes cluster. This is really just an organized collection of my notes and configs, but others can use these as a starting point. 
 ![alt text](src/Bare-Metal-Kube.png)
 
-##Configuration:
+## Configuration:
 ### [Configuring API High Availability](HA-API)
 ### [Provisioning a Bare Metal Cluster](Bare-Metal-Provision)
 ### [Configuring a Bare Metal Load Balancer](MetalLB)
