@@ -1,5 +1,8 @@
 # Bare Metal Provision with High Availability 
 
+# Overview
+TODO
+
 1. Prerequisites
     1. Disable swap
     2. Disable IPv6 if you're not using it. It just makes things easier to toubleshoot in my opinion.
