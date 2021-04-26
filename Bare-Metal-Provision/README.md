@@ -25,6 +25,7 @@ Add the following modules to a conf file in `/etc/modules-load.d`. Ex: `/etc/mod
 2. `br_netfilter`
 
 ## Set sysctl parameters
+Add the following parameters to a conf file in `/etc/sysctl.d`. Ex: `/etc/sysctl.d/99-k8.conf`
 1. `net.bridge.bridge-nf-call-iptables  = 1`
 2. `net.ipv4.ip_forward                 = 1`
 3. `net.bridge.bridge-nf-call-ip6tables = 1`
