@@ -1,6 +1,6 @@
 # Bare Metal Provision with High Availability 
 
-This section provisions a fresh Kubernetes cluster using [Kubeadm](https://kubernetes.io/docs/reference/setup-tools/kubeadm/). These steps should work fine on both Debian and RedHat based distros.
+This section provisions a fresh Kubernetes cluster using [Kubeadm](https://kubernetes.io/docs/reference/setup-tools/kubeadm/). These steps should work fine on both Debian and RedHat based distros. This configuration assumes you already have an HA-API configured, as discussed in the [previous section](../HA-API/).
 
 ## Prerequisites
 1. Disable swap
