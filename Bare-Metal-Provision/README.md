@@ -1,83 +1,84 @@
 # Bare Metal Provision with High Availability 
 
-## Overview
-TODO
+This section provisions a fresh Kubernetes cluster using Kubeadm. These steps should work fine on both Debian and RedHat based distros.
 
-1. Prerequisites
-    1. Disable swap
-    2. Disable IPv6 if you're not using it. It just makes things easier to toubleshoot in my opinion.
-    3. Firewall
-        1. IPTables works great, and is what I use. I've read Firewalld works okay as well.
-        2. Create iptables rules, and set them to load on boot (the the `iptables.up.rules` file)
-2. Install container runtime
-    1. Add Docker repo
-    2. Install containerd
-    3. As of 1.21, Kubernetes uses the `systemd` cgroup driver by default, but containerd still needs to be set to use it.
-        ```
-         [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
-           SystemdCgroup = true
-        ```
-3. Make sure the required modules load on boot
-    1. `overlay`
-    2. `br_netfilter`
-4. Set sysctl parameters
-    1. `net.bridge.bridge-nf-call-iptables  = 1`
-    2. `net.ipv4.ip_forward                 = 1`
-    3. `net.bridge.bridge-nf-call-ip6tables = 1`
-5. Install Kubernetes packages
-    1. `kubelet`
-    2. `kubeadm`
-    3. `kubectl`
-6. Clone the VM
-    1. Remove SSH keys.
-        1. `rm /etc/ssh/ssh_host*`
-    2. Shutdown system and clone
-    3. On Debian distros, you'll need to regenerate SSH keys manually
-        1. `dpkg-reconfigure openssh-server`
-    4. Change the IPs and hostnames of the clones
-    5. Verify `/sys/class/dmi/id/product_uuid` is uniqe on every host
-7. Initialize Kubernetes cluster
-    1. `kubeadm init --config provision.yaml --upload-certs` on a to-be master
-    2. Copy the kubeconfig to the correct user account
-    3. Install network addon. I used Flannel:
-        1. `kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml`
-    4. `kubectl get nodes` should now show the new master node as `Ready`
-        ```
-        NAME      STATUS   ROLES                  AGE   VERSION
-        node-01   Ready    control-plane,master   1h   v1.20.5
-        ```
-    6. Join the other master nodes
-        1. On the already-running master
-           1. `kubeadm init phase upload-certs --upload-certs`
-           2. `kubeadm token create --print-join-command`
-        3. Paste the join command with `--control-plane --certificate-key xxxx` appended, on each to-be master
-        4. Approve the CSRs for the new nodes.
-           1. `kubectl get csr`
-           2. `kubectl certificate approve <name>`
-    7. Join the other worker nodes
-        1. `kubeadm token create --print-join-command`
-        2. Approve the CSRs for the new nodes `kubectl get csr` and then `kubectl certificate approve <name>`
-    8. `kubectl get nodes` should now show all nodes as `Ready`
-       ```
-       NAME      STATUS   ROLES                  AGE   VERSION
-       node-01   Ready    control-plane,master   23h   v1.20.5
-       node-02   Ready    control-plane,master   23h   v1.20.5
-       node-03   Ready    control-plane,master   23h   v1.20.5
-       node-04   Ready    <none>                 23h   v1.20.5
-       node-05   Ready    <none>                 23h   v1.20.5
-       node-06   Ready    <none>                 23h   v1.20.5
-       ```
-    8. `kubectl get pods --all-namespaces` should show all pods as `Running`
-    9. Reboot all nodes for good measure.
-8. Run the [Sonobuoy](https://github.com/vmware-tanzu/sonobuoy) conformance test
-    1. NOTE: If this exits within a couple minutes, it most likely timed out connecting to the API or looking up a name in CoreDNS. 
-    2. Start the tests. They take awhile:`sonobuoy run --wait`
-    3. Watch the logs in another window: `kubectl logs sonobuoy --namespace sonobuoy -f`
-    4. Get the results: `results=$(sonobuoy retrieve)`
-    5. View the results: `sonobuoy results $results`
-    6. Delete the tests: `sonobuoy delete --wait`
-9. Run the [kube-bench](https://github.com/aquasecurity/kube-bench) security conformance tests
-    1. `kubectl apply -f https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job.yaml`
-    2. Wait until `kubectl get pods | grep kube-bench` shows `Completed`
-    3. `kubectl logs kube-bench-xxxxx | less`
-    4. `kubectl delete pod kube-bench-xxxxx`
+## Configuration
+
+### Prerequisites
+1. Disable swap
+2. Disable IPv6 if you're not using it. It just makes things easier to toubleshoot in my opinion.
+3. Firewall
+    1. IPTables works great, and is what I use. I've read Firewalld works okay as well.
+    2. Create iptables rules, and set them to load on boot (the the `iptables.up.rules` file)
+### Install container runtime
+1. Add Docker repo
+2. Install containerd
+3. As of 1.21, Kubernetes uses the `systemd` cgroup driver by default, but containerd still needs to be set to use it.
+    ```
+     [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+       SystemdCgroup = true
+    ```
+### Make sure the required modules load on boot
+1. `overlay`
+2. `br_netfilter`
+### Set sysctl parameters
+1. `net.bridge.bridge-nf-call-iptables  = 1`
+2. `net.ipv4.ip_forward                 = 1`
+3. `net.bridge.bridge-nf-call-ip6tables = 1`
+### Install Kubernetes packages
+1. `kubelet`
+2. `kubeadm`
+3. `kubectl`
+### Clone the VM
+1. Remove SSH keys.
+    1. `rm /etc/ssh/ssh_host*`
+2. Shutdown system and clone
+3. On Debian distros, you'll need to regenerate SSH keys manually
+    1. `dpkg-reconfigure openssh-server`
+4. Change the IPs and hostnames of the clones
+5. Verify `/sys/class/dmi/id/product_uuid` is uniqe on every host
+### Initialize Kubernetes cluster
+1. `kubeadm init --config provision.yaml --upload-certs` on a to-be master
+2. Copy the kubeconfig to the correct user account
+3. Install network addon. I used Flannel:
+    1. `kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml`
+4. `kubectl get nodes` should now show the new master node as `Ready`
+    ```
+    NAME      STATUS   ROLES                  AGE   VERSION
+    node-01   Ready    control-plane,master   1h   v1.20.5
+    ```
+6. Join the other master nodes
+    1. On the already-running master
+       1. `kubeadm init phase upload-certs --upload-certs`
+       2. `kubeadm token create --print-join-command`
+    3. Paste the join command with `--control-plane --certificate-key xxxx` appended, on each to-be master
+    4. Approve the CSRs for the new nodes.
+       1. `kubectl get csr`
+       2. `kubectl certificate approve <name>`
+7. Join the other worker nodes
+    1. `kubeadm token create --print-join-command`
+    2. Approve the CSRs for the new nodes `kubectl get csr` and then `kubectl certificate approve <name>`
+8. `kubectl get nodes` should now show all nodes as `Ready`
+   ```
+   NAME      STATUS   ROLES                  AGE   VERSION
+   node-01   Ready    control-plane,master   23h   v1.20.5
+   node-02   Ready    control-plane,master   23h   v1.20.5
+   node-03   Ready    control-plane,master   23h   v1.20.5
+   node-04   Ready    <none>                 23h   v1.20.5
+   node-05   Ready    <none>                 23h   v1.20.5
+   node-06   Ready    <none>                 23h   v1.20.5
+   ```
+8. `kubectl get pods --all-namespaces` should show all pods as `Running`
+9. Reboot all nodes for good measure.
+### Run the [Sonobuoy](https://github.com/vmware-tanzu/sonobuoy) conformance test
+1. NOTE: If this exits within a couple minutes, it most likely timed out connecting to the API or looking up a name in CoreDNS. 
+2. Start the tests. They take awhile:`sonobuoy run --wait`
+3. Watch the logs in another window: `kubectl logs sonobuoy --namespace sonobuoy -f`
+4. Get the results: `results=$(sonobuoy retrieve)`
+5. View the results: `sonobuoy results $results`
+6. Delete the tests: `sonobuoy delete --wait`
+### Run the [kube-bench](https://github.com/aquasecurity/kube-bench) security conformance tests
+1. `kubectl apply -f https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job.yaml`
+2. Wait until `kubectl get pods | grep kube-bench` shows `Completed`
+3. `kubectl logs kube-bench-xxxxx | less`
+4. `kubectl delete pod kube-bench-xxxxx`
