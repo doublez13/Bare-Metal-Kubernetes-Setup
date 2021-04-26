@@ -2,7 +2,7 @@
 
 https://metallb.universe.tf/concepts/layer2/  
 
-MetalLB takes one or more unique IP addresses and assigns them to services of type `LoadBalancer`. In this tutorial, we create an ingress controller and mark it as type LoadBalancer. MetalLB then assigns the ingress controller a `LoadBalancer Ingress` address from the pool. 
+MetalLB takes one or more unique IP addresses and assigns them to services of type `LoadBalancer`. In this section, we install and configure MetalLB. In the next section, we create an ingress controller and mark it as type LoadBalancer. MetalLB then assigns the ingress controller a `LoadBalancer Ingress` address from the pool. 
 
 ## Preparation
 If you’re using kube-proxy in IPVS mode (iptables is the default), since Kubernetes v1.14.2 you have to enable strict ARP mode.
