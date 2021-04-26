@@ -7,7 +7,7 @@ This section provisions a fresh Kubernetes cluster using Kubeadm. These steps sh
 2. Disable IPv6 if you're not using it. It just makes things easier to toubleshoot in my opinion.
 3. Firewall
     1. IPTables works great, and is what I use. I've read Firewalld works okay as well.
-    2. Create iptables rules, and set them to load on boot (the the `iptables.up.rules` file)
+    2. Create iptables rules, and set them to load on boot (the `iptables.up.rules` file)
 
 ## Install container runtime
 1. Add Docker repo
