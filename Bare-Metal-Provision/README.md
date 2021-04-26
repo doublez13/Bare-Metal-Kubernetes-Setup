@@ -20,6 +20,7 @@ As the [Dockershim CRI is now deprecated](https://kubernetes.io/blog/2020/12/02/
     ```
 
 ## Make sure the required modules load on boot
+Add the following modules to a conf file in `/etc/modules-load.d`. Ex: `/etc/modules-load.d/k8.conf`
 1. `overlay`
 2. `br_netfilter`
 
