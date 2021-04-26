@@ -2,15 +2,14 @@
 
 This section provisions a fresh Kubernetes cluster using Kubeadm. These steps should work fine on both Debian and RedHat based distros.
 
-## Configuration
-
-### Prerequisites
+## Prerequisites
 1. Disable swap
 2. Disable IPv6 if you're not using it. It just makes things easier to toubleshoot in my opinion.
 3. Firewall
     1. IPTables works great, and is what I use. I've read Firewalld works okay as well.
     2. Create iptables rules, and set them to load on boot (the the `iptables.up.rules` file)
-### Install container runtime
+
+## Install container runtime
 1. Add Docker repo
 2. Install containerd
 3. As of 1.21, Kubernetes uses the `systemd` cgroup driver by default, but containerd still needs to be set to use it.
@@ -18,18 +17,22 @@ This section provisions a fresh Kubernetes cluster using Kubeadm. These steps sh
      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
        SystemdCgroup = true
     ```
-### Make sure the required modules load on boot
+
+## Make sure the required modules load on boot
 1. `overlay`
 2. `br_netfilter`
-### Set sysctl parameters
+
+## Set sysctl parameters
 1. `net.bridge.bridge-nf-call-iptables  = 1`
 2. `net.ipv4.ip_forward                 = 1`
 3. `net.bridge.bridge-nf-call-ip6tables = 1`
-### Install Kubernetes packages
+
+## Install Kubernetes packages
 1. `kubelet`
 2. `kubeadm`
 3. `kubectl`
-### Clone the VM
+
+## Clone the VM
 1. Remove SSH keys.
     1. `rm /etc/ssh/ssh_host*`
 2. Shutdown system and clone
@@ -37,7 +40,8 @@ This section provisions a fresh Kubernetes cluster using Kubeadm. These steps sh
     1. `dpkg-reconfigure openssh-server`
 4. Change the IPs and hostnames of the clones
 5. Verify `/sys/class/dmi/id/product_uuid` is uniqe on every host
-### Initialize Kubernetes cluster
+
+## Initialize Kubernetes cluster
 1. `kubeadm init --config provision.yaml --upload-certs` on a to-be master
 2. Copy the kubeconfig to the correct user account
 3. Install network addon. I used Flannel:
@@ -70,14 +74,16 @@ This section provisions a fresh Kubernetes cluster using Kubeadm. These steps sh
    ```
 8. `kubectl get pods --all-namespaces` should show all pods as `Running`
 9. Reboot all nodes for good measure.
-### Run the [Sonobuoy](https://github.com/vmware-tanzu/sonobuoy) conformance test
+
+## Run the [Sonobuoy](https://github.com/vmware-tanzu/sonobuoy) conformance test
 1. NOTE: If this exits within a couple minutes, it most likely timed out connecting to the API or looking up a name in CoreDNS. 
 2. Start the tests. They take awhile:`sonobuoy run --wait`
 3. Watch the logs in another window: `kubectl logs sonobuoy --namespace sonobuoy -f`
 4. Get the results: `results=$(sonobuoy retrieve)`
 5. View the results: `sonobuoy results $results`
 6. Delete the tests: `sonobuoy delete --wait`
-### Run the [kube-bench](https://github.com/aquasecurity/kube-bench) security conformance tests
+
+## Run the [kube-bench](https://github.com/aquasecurity/kube-bench) security conformance tests
 1. `kubectl apply -f https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job.yaml`
 2. Wait until `kubectl get pods | grep kube-bench` shows `Completed`
 3. `kubectl logs kube-bench-xxxxx | less`
