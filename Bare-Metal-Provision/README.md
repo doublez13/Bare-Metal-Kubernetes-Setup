@@ -1,6 +1,6 @@
 # Bare Metal Provision with High Availability 
 
-# Overview
+## Overview
 TODO
 
 1. Prerequisites
