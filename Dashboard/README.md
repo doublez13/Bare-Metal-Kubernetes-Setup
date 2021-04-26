@@ -1,7 +1,6 @@
 # Web UI (Dashboard)
 
-## Overview
-TODO
+![alt text](https://raw.githubusercontent.com/kubernetes/dashboard/master/docs/images/dashboard-ui.png)
 
 ## Installation
 `kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml`
