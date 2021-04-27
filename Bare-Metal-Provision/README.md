@@ -50,7 +50,7 @@ Add the [Kubernetes repo](https://kubernetes.io/docs/setup/production-environmen
 ## Initialize Kubernetes cluster
 1. `kubeadm init --config provision.yaml --upload-certs` on a to-be master
 2. Copy the kubeconfig to the correct user account
-3. Install network addon. I used Flannel:
+3. Install a network addon. [Flannel](https://github.com/flannel-io/flannel) generally works out of the box:
     1. `kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml`
 4. `kubectl get nodes` should now show the new master node as `Ready`
     ```
@@ -71,12 +71,12 @@ Add the [Kubernetes repo](https://kubernetes.io/docs/setup/production-environmen
 8. `kubectl get nodes` should now show all nodes as `Ready`
    ```
    NAME      STATUS   ROLES                  AGE   VERSION
-   node-01   Ready    control-plane,master   23h   v1.20.5
-   node-02   Ready    control-plane,master   23h   v1.20.5
-   node-03   Ready    control-plane,master   23h   v1.20.5
-   node-04   Ready    <none>                 23h   v1.20.5
-   node-05   Ready    <none>                 23h   v1.20.5
-   node-06   Ready    <none>                 23h   v1.20.5
+   node-01   Ready    control-plane,master   1h   v1.20.5
+   node-02   Ready    control-plane,master   1h   v1.20.5
+   node-03   Ready    control-plane,master   1h   v1.20.5
+   node-04   Ready    <none>                 1h   v1.20.5
+   node-05   Ready    <none>                 1h   v1.20.5
+   node-06   Ready    <none>                 1h   v1.20.5
    ```
 8. `kubectl get pods --all-namespaces` should show all pods as `Running`
 9. Reboot all nodes for good measure.
