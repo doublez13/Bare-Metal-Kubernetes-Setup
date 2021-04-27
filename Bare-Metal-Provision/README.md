@@ -9,7 +9,7 @@ This section provisions a fresh Kubernetes cluster using [Kubeadm](https://kuber
     1. IPTables works great, and is what I use. I've read Firewalld works okay as well.
     2. Create iptables rules, and set them to load on boot (the `iptables.up.rules` file)
 
-## Install container runtime
+## Install a container runtime
 As the [Dockershim CRI is now deprecated](https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/), containerd is a good choice to use.
 1. Add the [Docker repo](https://docs.docker.com/engine/install/) (provides the containerd packages)
 2. Install containerd
@@ -33,6 +33,7 @@ Add the following parameters to a conf file in `/etc/sysctl.d`. Ex: `/etc/sysctl
 Load the new paramters with `sysctl --system`
 
 ## Install Kubernetes packages
+Add the [Kubernetes repo](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl) repo and install the following packages.
 1. `kubelet`
 2. `kubeadm`
 3. `kubectl`
