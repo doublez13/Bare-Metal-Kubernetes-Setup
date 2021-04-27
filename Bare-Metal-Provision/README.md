@@ -34,9 +34,9 @@ Load the new paramters with `sysctl --system`
 
 ## Install Kubernetes packages
 Add the [Kubernetes repo](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl) repo and install the following packages.
-1. `kubelet`
-2. `kubeadm`
-3. `kubectl`
+1. `kubelet`: The command to bootstrap the cluster.
+2. `kubeadm`: The component that runs on all of the machines in your cluster and does things like starting pods and containers.
+3. `kubectl`: The command line util to talk to your cluster
 
 ## Clone the VM
 1. Remove SSH keys.
