@@ -14,7 +14,8 @@ Kubernetes version arin the format Major.Minor.Patch (1.21.1)
     9. Restart kubelet service
 3. Upgrade worker nodes 
     1. Upgrade kubeadm on the worker nodes
-    2. Drain the node `kubectl drain <node-to-drain> --ignore-daemonsets`
-    3. Upgrade kubelet and kubectl on the worker node
-    4. Restart kubelet service
-    5. Uncordon the node `kubectl uncordon <node-to-drain>`
+    2. `kubeadm upgrade node`
+    3. Drain the node `kubectl drain <node-to-drain> --ignore-daemonsets`
+    4. Upgrade kubelet and kubectl on the worker node
+    5. Restart kubelet service
+    6. Uncordon the node `kubectl uncordon <node-to-drain>`
