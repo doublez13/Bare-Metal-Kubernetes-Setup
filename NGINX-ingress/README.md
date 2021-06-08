@@ -7,6 +7,30 @@ If the node running the nginx ingress controller crashes, it would take five min
 To work around this, we scale up the ingress-nginx-controller deployment to two replicas. This allows MetalLB to move the IP address to the node running the other replica.  
 `kubectl scale deployment -n ingress-nginx ingress-nginx-controller --replicas=2`  
 
+To ensure the pods are scheduled on separate nodes, an anti-affinity rule can be added under the template section of the spec.  
+```
+affinity: 
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 100
+      podAffinityTerm:
+        labelSelector:
+          matchExpressions:
+          - key: app.kubernetes.io/name
+            operator: In
+            values:
+            - ingress-nginx
+          - key: app.kubernetes.io/instance
+            operator: In
+            values:
+            - ingress-nginx
+          - key: app.kubernetes.io/component
+            operator: In
+            values:
+            - controller
+        topologyKey: kubernetes.io/hostname
+```
+
 # Cert-Manager
 ```
 kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.3.1/cert-manager.yaml
