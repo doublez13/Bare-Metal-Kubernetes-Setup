@@ -30,6 +30,11 @@ affinity:
             - controller
         topologyKey: kubernetes.io/hostname
 ```
+## Helm based install
+```
+helm install ingress-nginx ingress-nginx/ingress-nginx --set controller.kind=DaemonSet -n ingress-nginx --create-namespace
+helm upgrade -n ingress-nginx ingress-nginx ingress-nginx/ingress-nginx
+```
 
 # Cert-Manager
 ```
