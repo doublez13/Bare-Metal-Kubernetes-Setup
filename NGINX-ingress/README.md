@@ -32,7 +32,7 @@ affinity:
 ```
 ## Helm based install
 ```
-helm install ingress-nginx ingress-nginx/ingress-nginx --set controller.kind=DaemonSet -n ingress-nginx --create-namespace
+helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx --create-namespace -f values.yaml 
 helm upgrade -n ingress-nginx ingress-nginx ingress-nginx/ingress-nginx
 ```
 
