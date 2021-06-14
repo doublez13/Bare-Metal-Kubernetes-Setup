@@ -1,0 +1,6 @@
+nfs:
+  server: NFS_SERVER_NAME
+  path: NFS_VOLUME_PATH
+
+storageClass:
+  onDelete: retain
