@@ -18,7 +18,7 @@ As the [Dockershim CRI is now deprecated](https://kubernetes.io/blog/2020/12/02/
        
     2. Systemd Cgroup Version: As of Debian 11, systemd defaults to using control groups v2. Double check that you're using cgroups v2.
     2. Containerd Cgroup Version: The default value of `runtime type` is `io.containerd.runc.v2`, which means cgroups v2.
-    3. Containerd Cgroup Driver.  
+    3. Containerd Cgroup Driver: SEt Containerd to use the SystemdCgroup driver  
          ` containerd config default > /etc/containerd/config.toml`
     
         ```
