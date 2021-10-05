@@ -13,7 +13,9 @@ This section provisions a fresh Kubernetes cluster using [Kubeadm](https://kuber
 As the [Dockershim CRI is now deprecated](https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/), containerd is a good choice to use.
 1. Add the [Docker repo](https://docs.docker.com/engine/install/) (provides the containerd packages)
 2. Install containerd
-3. As of 1.21, Kubernetes [uses the `systemd` cgroup driver by default](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.21.md#no-really-you-must-read-this-before-you-upgrade), but containerd still needs to be set to use it.
+3. As of 1.21, Kubernetes [uses the `systemd` cgroup driver by default](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.21.md#no-really-you-must-read-this-before-you-upgrade), but containerd still needs to be set to use it.  
+    ` containerd config default > /etc/containerd/config.toml`
+    
     ```
      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
        SystemdCgroup = true
