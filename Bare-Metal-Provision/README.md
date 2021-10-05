@@ -61,6 +61,7 @@ Add the [Kubernetes repo](https://kubernetes.io/docs/setup/production-environmen
     1. curl https://docs.projectcalico.org/manifests/calico.yaml -O
     2. Customize if necessary
     3. `kubectl apply -f calico.yaml`
+    4. [Install calicoctl](https://docs.projectcalico.org/getting-started/clis/calicoctl/install)
 4. `kubectl get nodes` should now show the new master node as `Ready`
     ```
     NAME      STATUS   ROLES                  AGE   VERSION
