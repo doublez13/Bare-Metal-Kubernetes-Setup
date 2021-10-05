@@ -93,7 +93,7 @@ Add the [Kubernetes repo](https://kubernetes.io/docs/setup/production-environmen
 
 ## Run the [Sonobuoy](https://github.com/vmware-tanzu/sonobuoy) conformance test
 1. NOTE: If this exits within a couple minutes, it most likely timed out connecting to the API or looking up a name in CoreDNS. 
-2. Start the tests. They take awhile:`sonobuoy run --wait`
+2. Start the tests. They take awhile: `sonobuoy run --wait`
 3. Watch the logs in another window: `kubectl logs sonobuoy --namespace sonobuoy -f`
 4. Get the results: `results=$(sonobuoy retrieve)`
 5. View the results: `sonobuoy results $results`
