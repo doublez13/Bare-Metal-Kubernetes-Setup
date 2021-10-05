@@ -57,8 +57,10 @@ Add the [Kubernetes repo](https://kubernetes.io/docs/setup/production-environmen
 ## Initialize Kubernetes cluster
 1. `kubeadm init --config provision.yaml --upload-certs` on a to-be master
 2. Copy the kubeconfig to the correct user account
-3. Install a network addon. [Flannel](https://github.com/flannel-io/flannel) generally works out of the box:
-    1. `kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml`
+3. Install a network addon. I'm using Calico:
+    1. curl https://docs.projectcalico.org/manifests/calico.yaml -O
+    2. Customize if necessary
+    3. `kubectl apply -f calico.yaml`
 4. `kubectl get nodes` should now show the new master node as `Ready`
     ```
     NAME      STATUS   ROLES                  AGE   VERSION
