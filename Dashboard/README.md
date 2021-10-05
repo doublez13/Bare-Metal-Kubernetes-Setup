@@ -3,7 +3,7 @@
 ![alt text](https://raw.githubusercontent.com/kubernetes/dashboard/master/docs/images/dashboard-ui.png)
 
 ## Installation
-`kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml`
+`kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.3.1/aio/deploy/recommended.yaml`
 
 We first create a Service Account called admin, and grant that Service Account the permissions in the `cluster-admin` role.
 ```
