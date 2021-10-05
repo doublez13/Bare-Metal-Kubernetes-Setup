@@ -58,7 +58,7 @@ Add the [Kubernetes repo](https://kubernetes.io/docs/setup/production-environmen
 1. `kubeadm init --config provision.yaml --upload-certs` on a to-be master
 2. Copy the kubeconfig to the correct user account
 3. Install a network addon. I'm using Calico:
-    1. curl https://docs.projectcalico.org/manifests/calico.yaml -O
+    1. `curl https://docs.projectcalico.org/manifests/calico.yaml -O`
     2. Customize if necessary
     3. `kubectl apply -f calico.yaml`
     4. [Install calicoctl](https://docs.projectcalico.org/getting-started/clis/calicoctl/install)
