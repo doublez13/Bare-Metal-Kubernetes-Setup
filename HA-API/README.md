@@ -42,6 +42,7 @@ vrrp_instance VI_1 {
 ```
 
 #### check_apiserver.sh Script
+NOTE: double check that curl is installed.
 ```
 #!/bin/sh
 
