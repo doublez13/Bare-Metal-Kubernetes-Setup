@@ -3,7 +3,6 @@
 If the node running the nginx ingress controller crashes, it would take five minutes (default pod-eviction-timeout) for the ingress controller to be rescheduled on another node. This would result in a five minute downtime to all containers behind the ingress controller.  
 
 To work around this, we scale up the ingress-nginx-controller deployment to two replicas. This allows MetalLB to move the IP address to the node running the other replica.  
-`kubectl scale deployment -n ingress-nginx ingress-nginx-controller --replicas=2`  
 
 To ensure the pods are scheduled on separate nodes, an anti-affinity rule can be added under the template section of the spec.  
 ```
