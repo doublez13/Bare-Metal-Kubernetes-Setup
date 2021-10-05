@@ -13,14 +13,17 @@ This section provisions a fresh Kubernetes cluster using [Kubeadm](https://kuber
 As the [Dockershim CRI is now deprecated](https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/), containerd is a good choice to use.
 1. Add the [Docker repo](https://docs.docker.com/engine/install/) (provides the containerd packages)
 2. Install containerd
-3. As of 1.21, Kubernetes [uses the `systemd` cgroup driver by default](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.21.md#no-really-you-must-read-this-before-you-upgrade), but containerd still needs to be set to use it.  
-    ` containerd config default > /etc/containerd/config.toml`
+3. Cgroups Config
+    1. Kubernetes Cgroup Config: As of 1.21, Kubernetes [uses the `systemd` cgroup driver by default](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.21.md#no-really-you-must-read-this-before-you-upgrade)
+       
+    2. OS Cgroup Config: As of Debian 11, systemd defaults to using control groups v2. Double check that you're using cgroups v2.
+    2. Containerd CGroup Config: The default value of `runtime type` is `io.containerd.runc.v2`, which means cgroups v2. Also tell containerd to use the Systemd Cgroup driver.  
+         ` containerd config default > /etc/containerd/config.toml`
     
-    ```
-     [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
-       SystemdCgroup = true
-    ```
-4. As of Containerd 1.4, the default value of `runtime type` is `io.containerd.runc.v2`, which means cgroups v2. Double check that your OS is using this.
+        ```
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+          SystemdCgroup = true
+        ```
 
 ## Make sure the required modules load on boot
 Add the following modules to a conf file in `/etc/modules-load.d`. Ex: `/etc/modules-load.d/k8.conf`
