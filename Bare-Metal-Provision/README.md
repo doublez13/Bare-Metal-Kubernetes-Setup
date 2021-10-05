@@ -20,6 +20,7 @@ As the [Dockershim CRI is now deprecated](https://kubernetes.io/blog/2020/12/02/
      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
        SystemdCgroup = true
     ```
+4. As of Containerd 1.4, the default value of `runtime type` is `io.containerd.runc.v2`, which means cgroups v2. Double check that your OS is using this.
 
 ## Make sure the required modules load on boot
 Add the following modules to a conf file in `/etc/modules-load.d`. Ex: `/etc/modules-load.d/k8.conf`
