@@ -57,6 +57,8 @@ if ip addr | grep -q ${APISERVER_VIP}; then
 fi
 ```
 
+`chmod +x /etc/keepalived/check_apiserver.sh`
+
 ### HAProxy Configuration
 ```
 # /etc/haproxy/haproxy.cfg
