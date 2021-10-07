@@ -4,3 +4,4 @@
 3. Isolating the API
 4. Isolating ports on the nodes
 5. Ingress annotations
+6. Running containers as a regular user
