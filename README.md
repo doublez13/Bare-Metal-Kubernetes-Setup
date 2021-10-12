@@ -9,6 +9,7 @@ This is a very basic setup (with example configs) for setting up a bare metal Ku
 ### [Configuring a Bare Metal Load Balancer](MetalLB)
 ### [Configuring an Ingress Controller with SSL](NGINX-ingress)
 ### [Configuring the Kubernetes Dashboard with Metrics](Dashboard)
+### [Configuring Network Policies](Network-Policies)
 
 ## Components
 1. [Keepalived](https://www.keepalived.org/): VRRP Software for high-availability
