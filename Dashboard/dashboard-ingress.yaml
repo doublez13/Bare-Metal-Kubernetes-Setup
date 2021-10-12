@@ -6,6 +6,7 @@ metadata:
     cert-manager.io/issuer: "letsencrypt-prod"
     #nginx.ingress.kubernetes.io/whitelist-source-range: "OPTIONAL_IP_RANGES_GO_HERE"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    kubernetes.io/ingress.class: "nginx"
   namespace: kubernetes-dashboard
 spec:
   tls:
