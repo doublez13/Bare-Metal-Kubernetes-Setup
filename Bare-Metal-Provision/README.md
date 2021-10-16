@@ -5,6 +5,11 @@ This section provisions a fresh Kubernetes cluster using [Kubeadm](https://kuber
 ## Prerequisites
 1. Disable swap
 2. Disable IPv6 if you're not using it. It just makes things easier to toubleshoot in my opinion.
+   ```
+    #Append the following lines to /etc/sysctl.conf
+    net.ipv6.conf.all.disable_ipv6 = 1
+    net.ipv6.conf.default.disable_ipv6 = 1
+   ```
 3. Install iptables/nftables and enable it to start on boot.
 
 ## Install a container runtime
