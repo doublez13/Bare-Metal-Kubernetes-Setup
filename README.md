@@ -1,6 +1,7 @@
 # Bare Metal Kubernetes Cluster Setup
 
-This is a very basic setup (with example configs) for setting up a bare metal Kubernetes cluster. This is really just an organized collection of my notes and configs, but others can use these as a starting point. 
+This repository is a step by step guide for configuring a bare metal Kubernetes cluster. This is really just an organized collection of my notes and configs, but others can use these as a starting point. 
+
 ![alt text](src/Bare-Metal-Kube.png)
 
 ## Configuration:
