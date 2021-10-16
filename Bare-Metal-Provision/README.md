@@ -77,8 +77,10 @@ Add the [Kubernetes repo](https://kubernetes.io/docs/setup/production-environmen
     ```
 6. Join the other master nodes
     1. On the already-running master
-       1. `kubeadm init phase upload-certs --upload-certs`
-       2. `kubeadm token create --print-join-command`
+       1. Reupload control plain certs and print the decryption key to retrieve them on the other master nodes.  
+          `kubeadm init phase upload-certs --upload-certs`
+       3. Print the join command to use on the other master nodes.  
+          `kubeadm token create --print-join-command`
     3. Paste the join command with `--control-plane --certificate-key xxxx` appended, on each to-be master
     4. Approve the CSRs for the new nodes.
        1. `kubectl get csr`
