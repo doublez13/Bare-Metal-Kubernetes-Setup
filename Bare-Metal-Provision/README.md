@@ -4,6 +4,10 @@ This section provisions a fresh Kubernetes cluster using [Kubeadm](https://kuber
 
 ## Prerequisites
 1. Disable swap
+   ```
+   Remove swap references from /etc/fstab 
+   swapoff -a 
+   ```
 2. Disable IPv6 if you're not using it. It just makes things easier to toubleshoot in my opinion.
    ```
     #Append the following lines to /etc/sysctl.conf
