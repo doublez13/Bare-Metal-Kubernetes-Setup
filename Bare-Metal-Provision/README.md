@@ -26,7 +26,8 @@ As the [Dockershim CRI is now deprecated](https://kubernetes.io/blog/2020/12/02/
         ```
         containerd config default > /etc/containerd/config.toml
         ```
-        [More info found here](https://github.com/containerd/containerd/issues/4203#issuecomment-651532765)
+        [More info found here](https://github.com/containerd/containerd/issues/4203#issuecomment-651532765)  
+        [Unable to verify cgroup driver](https://github.com/kubernetes-sigs/cri-tools/issues/728)
         ```
         [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
           SystemdCgroup = true
