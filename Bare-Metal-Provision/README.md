@@ -18,11 +18,10 @@ This section provisions a fresh Kubernetes cluster using [Kubeadm](https://kuber
 
 ## Install a container runtime
 As the [Dockershim CRI is now deprecated](https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/), containerd is a good choice to use.
-1. Add the [Docker repo](https://docs.docker.com/engine/install/) (provides the containerd packages)
-2. Install containerd
-3. Cgroups Config
+1. Add the [Docker repo](https://docs.docker.com/engine/install/) (provides the containerd packages).
+2. Install containerd and set it to start on boot.
+3. Cgroups Config:
     1. **Kubernetes Cgroup Driver:** As of 1.21, Kubernetes [uses the `systemd` cgroup driver by default](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.21.md#no-really-you-must-read-this-before-you-upgrade)
-       
     2. **Systemd Cgroup Version:** As of Debian 11, systemd [defaults to using control groups v2](https://rootlesscontaine.rs/getting-started/common/cgroup2/).
     2. **Containerd Cgroup Version:** The default value of `runtime type` is `io.containerd.runc.v2`, which means cgroups v2.
     3. **Containerd Cgroup Driver:** Set containerd to use the `SystemdCgroup` driver.  
@@ -66,10 +65,10 @@ Add the [Kubernetes repo](https://kubernetes.io/docs/setup/production-environmen
 ## Initialize Kubernetes cluster
 1. `kubeadm init --config provision.yaml --upload-certs` on a to-be master
 2. Copy the kubeconfig to the correct user account
-3. Install a network addon. I'm using Calico:
-    1. `curl https://docs.projectcalico.org/manifests/calico.yaml -O`
+3. Install a network addon, paying attention to Network Policy support. Calico is a good option:
+    1. Download the manifest: `curl https://docs.projectcalico.org/manifests/calico.yaml -O`
     2. Customize if necessary
-    3. `kubectl apply -f calico.yaml`
+    3. Apply the manifest: `kubectl apply -f calico.yaml`
     4. [Install calicoctl](https://docs.projectcalico.org/getting-started/clis/calicoctl/install)
 4. `kubectl get nodes` should now show the new master node as `Ready`
     ```
@@ -98,7 +97,6 @@ Add the [Kubernetes repo](https://kubernetes.io/docs/setup/production-environmen
    node-06   Ready    <none>                 1h   v1.20.5
    ```
 8. `kubectl get pods --all-namespaces` should show all pods as `Running`
-9. Reboot all nodes for good measure.
 
 ## Run the [Sonobuoy](https://github.com/vmware-tanzu/sonobuoy) conformance test
 1. NOTE: If this exits within a couple minutes, it most likely timed out connecting to the API or looking up a name in CoreDNS. 
