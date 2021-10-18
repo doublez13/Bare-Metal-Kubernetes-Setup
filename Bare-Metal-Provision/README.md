@@ -19,7 +19,7 @@ As the [Dockershim CRI is now deprecated](https://kubernetes.io/blog/2020/12/02/
 1. Add the [Docker repo](https://docs.docker.com/engine/install/) (provides the containerd packages).
 2. Install containerd and enable it to start on boot.
 3. Cgroups Config:
-    1. **Kubernetes Cgroup Driver:** As of 1.21, Kubernetes [uses the `systemd` cgroup driver by default](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.21.md#no-really-you-must-read-this-before-you-upgrade), and we specify it in `provision.yaml`.
+    1. **Kubernetes Cgroup Driver:** As of 1.21, Kubernetes [uses the `systemd` cgroup driver by default](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.21.md#no-really-you-must-read-this-before-you-upgrade), but we'll specify it in `provision.yaml` as well.
     2. **Systemd Cgroup Version:** As of Debian 11, systemd [defaults to using control groups v2](https://rootlesscontaine.rs/getting-started/common/cgroup2/).
     2. **Containerd Cgroup Version:** The default value of `runtime type` is `io.containerd.runc.v2`, which means cgroups v2.
     3. **Containerd Cgroup Driver:** [Set containerd to use the `SystemdCgroup` driver.](https://github.com/containerd/containerd/issues/4203#issuecomment-651532765) 
