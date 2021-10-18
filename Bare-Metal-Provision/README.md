@@ -33,7 +33,7 @@ As the [Dockershim CRI is now deprecated](https://kubernetes.io/blog/2020/12/02/
         Due to a containerd [bug](https://github.com/kubernetes-sigs/cri-tools/issues/728), I am unaware of a way to verify the cgroup driver has been set to systemd.
 
 ## Make sure the required modules load on boot
-Add the following to a conf file in `/etc/modules-load.d`. Ex: `/etc/modules-load.d/k8.conf`
+Add the following modules to a conf file in `/etc/modules-load.d`. Ex: `/etc/modules-load.d/k8.conf`
 ```
 overlay
 br_netfilter
@@ -41,9 +41,11 @@ br_netfilter
 
 ## Set sysctl parameters
 Add the following parameters to a conf file in `/etc/sysctl.d`. Ex: `/etc/sysctl.d/99-k8.conf`
-1. `net.bridge.bridge-nf-call-iptables  = 1`
-2. `net.ipv4.ip_forward                 = 1`
-3. `net.bridge.bridge-nf-call-ip6tables = 1`
+```
+net.bridge.bridge-nf-call-iptables  = 1
+net.ipv4.ip_forward                 = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+```
 
 Load the new paramters with `sysctl --system`
 
