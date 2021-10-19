@@ -24,4 +24,3 @@ controller:
 
   service:
     externalTrafficPolicy: "Local"
-    sessionAffinity: "ClientIP"
