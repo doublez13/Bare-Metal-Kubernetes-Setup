@@ -1,0 +1,15 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: CLAIM_NAME
+  namespace: "default"
+  labels:
+    app.kubernetes.io/name: wordpress
+    app.kubernetes.io/instance: HELM_INSTANCE_NAME
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "10Gi"
+  storageClassName: nfs-client
