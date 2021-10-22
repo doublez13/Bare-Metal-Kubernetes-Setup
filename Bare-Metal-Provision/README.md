@@ -117,4 +117,4 @@ Add the [Kubernetes repo](https://kubernetes.io/docs/setup/production-environmen
 1. `kubectl apply -f https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job.yaml`
 2. Wait until `kubectl get pods | grep kube-bench` shows `Completed`
 3. `kubectl logs kube-bench-xxxxx | less`
-4. `kubectl delete pod kube-bench-xxxxx`
+4. `kubectl delete job kube-bench`
