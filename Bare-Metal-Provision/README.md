@@ -30,7 +30,18 @@ As the [Dockershim CRI is now deprecated](https://kubernetes.io/blog/2020/12/02/
         [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
           SystemdCgroup = true
         ```
-        Due to a containerd [bug](https://github.com/kubernetes-sigs/cri-tools/issues/728), I am unaware of a way to verify the cgroup driver has been set to systemd.
+        Starting with containerd 1.5, the cgroup driver and version can be verified as follows.
+        ```
+        "runtimes": {
+        "runc": {
+          "runtimeType": "io.containerd.runc.v2",
+          "runtimeEngine": "",
+          "PodAnnotations": null,
+          "ContainerAnnotations": null,
+          "runtimeRoot": "",
+          "options": {
+            "SystemdCgroup": true
+        ```
 
 ## Make sure the required modules load on boot
 Add the following modules to a conf file in `/etc/modules-load.d`. Ex: `/etc/modules-load.d/k8.conf`
