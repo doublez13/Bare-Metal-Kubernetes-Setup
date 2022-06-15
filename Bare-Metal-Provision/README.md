@@ -13,11 +13,12 @@ This section provisions a fresh Kubernetes cluster using [Kubeadm](https://kuber
     net.ipv6.conf.default.disable_ipv6 = 1
    ```
 3. Install iptables/nftables and enable it to start on boot.
+4. (Optional) Enable Secure Boot and verify with `mokutil --sb-state`
 
 ## Install a container runtime
 As the [Dockershim CRI is now deprecated](https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/), containerd is a good choice to use.
 1. Add the [Docker repo](https://docs.docker.com/engine/install/) (provides the containerd packages).
-2. Install containerd and enable it to start on boot.
+2. Install `containerd.io` and enable it to start on boot.
 3. Cgroups Config:
     1. **Kubernetes Cgroup Driver:** As of 1.21, Kubernetes [uses the `systemd` cgroup driver by default](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.21.md#no-really-you-must-read-this-before-you-upgrade), but we'll specify it in `provision.yaml` as well.
     2. **Systemd Cgroup Version:** As of Debian 11, systemd [defaults to using control groups v2.](https://www.debian.org/releases/bullseye/amd64/release-notes/ch-whats-new.en.html#cgroupv2)
