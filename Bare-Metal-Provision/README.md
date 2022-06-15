@@ -53,7 +53,7 @@ br_netfilter
 ```
 
 ## Set sysctl parameters
-Add the following parameters to a conf file in `/etc/sysctl.d`. Ex: `/etc/sysctl.d/99-k8.conf`
+Add the following parameters to a conf file in `/etc/sysctl.d`. Ex: `/etc/sysctl.d/99-k8s.conf`
 ```
 net.bridge.bridge-nf-call-iptables  = 1
 net.ipv4.ip_forward                 = 1
