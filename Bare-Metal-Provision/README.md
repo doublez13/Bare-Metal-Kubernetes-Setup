@@ -71,7 +71,7 @@ Add the [Kubernetes repo](https://kubernetes.io/docs/setup/production-environmen
 ## Clone the VM
 1. Remove SSH keys.
     1. `rm /etc/ssh/ssh_host*`
-2. Shutdown system and clone
+2. Shutdown system and clone. In vSphere environments, this VM could be converted into a template. This same image can be used for both the controllers and workers.
 3. On Debian distros, you'll need to regenerate SSH keys manually
     1. `dpkg-reconfigure openssh-server`
 4. Change the IPs and hostnames of the clones
