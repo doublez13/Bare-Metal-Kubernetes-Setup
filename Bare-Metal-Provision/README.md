@@ -31,7 +31,7 @@ As the [Dockershim CRI is now deprecated](https://kubernetes.io/blog/2020/12/02/
         [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
           SystemdCgroup = true
         ```
-        Starting with containerd 1.5, the cgroup driver and version can be verified as follows. A bug in versions < 1.5 produces the wrong output
+        Starting with containerd 1.5, the cgroup driver and version can be verified as follows. A bug in versions < 1.5 produces the wrong output. Note the `crictl` command will automatically be installed along with the Kubernetes.
         ```
         # crictl info | grep -B8 SystemdCgroup
         "runtimes": {
