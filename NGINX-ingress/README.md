@@ -36,7 +36,7 @@ helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx --create
 
 # Cert-Manager
 ```
-kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.yaml
+kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.8.1/cert-manager.yaml
 wget https://cert-manager.io/docs/tutorials/acme/example/production-issuer.yaml
 wget https://cert-manager.io/docs/tutorials/acme/example/staging-issuer.yaml
 ```
