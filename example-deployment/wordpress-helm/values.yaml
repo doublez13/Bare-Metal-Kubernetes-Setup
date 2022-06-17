@@ -34,4 +34,8 @@ mariadb:
 
 persistence:
   enabled: true
-  existingClaim: claim-name
+  annotations:
+    helm.sh/resource-policy: "keep"
+  storageClass: "nfs-client"
+  size: 10Gi
+
