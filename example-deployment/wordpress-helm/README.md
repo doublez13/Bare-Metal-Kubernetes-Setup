@@ -5,5 +5,6 @@ helm repo update
 ```
 
 ```
+kubectl apply -f pvc.yaml
 helm install my-site bitnami/wordpress -f values.yaml
 ```
