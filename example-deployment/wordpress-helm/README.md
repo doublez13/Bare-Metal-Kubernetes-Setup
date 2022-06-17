@@ -1,4 +1,4 @@
-Add the helm repo for Wordpress
+Add the helm repo for Wordpress.  
 Note creating a separate PVC should not be required. This can be handled in helm.
 
 ```
