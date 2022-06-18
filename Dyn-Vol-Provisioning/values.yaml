@@ -1,9 +1,0 @@
-nfs:
-  server: NFS_SERVER_NAME
-  path: NFS_VOLUME_PATH
-  mountOptions:
-    - "nfsvers=3"
-
-storageClass:
-  #If a user deletes a PersistentVolumeClaim, the corresponding PersistentVolume will not be deleted
-  reclaimPolicy: Retain
