@@ -2,7 +2,7 @@
 Kubernetes versions take the format Major.Minor.Patch (1.24.2)
 
 1. Read the CHANGELOG file! Seriously
-2. Upgrade control plane nodes
+2. Upgrade first control plane nodes
     1. Upgrade kubeadm on all master nodes
        ```
        apt-mark unhold kubeadm
@@ -13,11 +13,18 @@ Kubernetes versions take the format Major.Minor.Patch (1.24.2)
     3. `kubeadm upgrade plan`
     4. `kubeadm upgrade apply v1.24.x`
     5. Upgrade kubelet and kubectl
-    6. Restart kubelet service
-    7. Check if your CNI has any special upgrade instructions
-    8. `kubeadm upgrade node` on any additional control plane nodes
-    9. Upgrade kubelet and kubectl
-    10. Restart kubelet service
+       ```
+       kubectl drain <node-to-drain> --ignore-daemonsets
+       apt-mark unhold kubelet kubectl
+       apt-get update
+       apt-get install -y kubelet=1.24.x-00 kubectl=1.24.x-00
+       apt-mark hold kubelet kubectl
+       ```
+    7. Restart kubelet service
+    8. Check if your CNI has any special upgrade instructions
+    9. `kubeadm upgrade node` on any additional control plane nodes
+    10. Upgrade kubelet and kubectl
+    11. Restart kubelet service
 3. Upgrade worker nodes 
     1. Upgrade kubeadm on the worker nodes
     2. `kubeadm upgrade node`
