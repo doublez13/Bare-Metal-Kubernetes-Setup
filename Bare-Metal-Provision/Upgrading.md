@@ -37,7 +37,7 @@ Kubernetes versions take the format Major.Minor.Patch (1.24.2)
        kubectl uncordon <node-to-drain>
        ```
 3. Upgrade each worker node fully before moving to the next
-    1. Upgrade kubeadm on the worker nodes
+    1. Upgrade kubeadm
        ```
        apt-mark unhold kubeadm
        apt-get update
