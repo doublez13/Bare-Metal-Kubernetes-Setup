@@ -10,15 +10,16 @@ Kubernetes versions take the format Major.Minor.Patch (1.24.2)
        apt-get install -y kubeadm=1.24.x-00
        apt-mark hold kubeadm
        ```
-    2. On first control plan node upgrade only
-       ```
-       kubeadm upgrade plan
-       kubeadm upgrade apply v1.24.x
-       ```
-    3. On other control plan nodes only
-       ```
-       kubeadm upgrade node
-       ```
+    2. Upgrade node with kubeadm 
+        1. On first control plan node upgrade only
+           ```
+           kubeadm upgrade plan
+           kubeadm upgrade apply v1.24.x
+           ```
+        2. On other control plan nodes only
+           ```
+           kubeadm upgrade node
+           ```
     5. Upgrade kubelet and kubectl
        ```
        kubectl drain <node-to-drain> --ignore-daemonsets
