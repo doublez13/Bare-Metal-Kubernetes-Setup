@@ -12,8 +12,8 @@ Kubernetes versions take the format Major.Minor.Patch (1.24.2)
        ```
     2. On first control plan node upgrade only
        ```
-       kubeadm upgrade plan`
-       kubeadm upgrade apply v1.24.x`
+       kubeadm upgrade plan
+       kubeadm upgrade apply v1.24.x
        ```
     3. On other control plan nodes only
        ```
