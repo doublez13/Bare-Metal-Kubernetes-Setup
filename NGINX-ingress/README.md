@@ -1,5 +1,6 @@
 # NGINX Ingress Controller
 
+## Redundancy 
 If the node running the nginx ingress controller crashes, it would take five minutes (default pod-eviction-timeout) for the ingress controller to be rescheduled on another node. This would result in a five minute downtime to all containers behind the ingress controller.  
 
 To work around this, we scale up the ingress-nginx-controller deployment to two replicas. This allows MetalLB to move the IP address to the node running the other replica.  
