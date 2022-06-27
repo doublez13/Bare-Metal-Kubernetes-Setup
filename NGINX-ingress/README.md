@@ -34,6 +34,17 @@ helm repo update
 helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx --create-namespace -f values.yaml 
 ```
 
+## Pod Security Standard
+After verifying the ingress controller works as expected, you can apply the restricted Pod Security Standard to the namespace.
+```
+kubectl label --dry-run=server --overwrite ns ingress-nginx pod-security.kubernetes.io/enforce=restricted
+```
+If there are no errors on the dry run, apply the policy.
+```
+kubectl label --overwrite ns ingress-nginx pod-security.kubernetes.io/enforce=restricted
+kubectl label --overwrite ns ingress-nginx pod-security.kubernetes.io/enforce-version=v1.24
+```
+
 # Cert-Manager
 ```
 kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.8.1/cert-manager.yaml
