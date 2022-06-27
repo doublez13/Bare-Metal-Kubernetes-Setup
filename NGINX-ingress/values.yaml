@@ -24,3 +24,17 @@ controller:
 
   service:
     externalTrafficPolicy: "Local"
+
+ # These settings allow the nginx ingress controllers to be ran under a "restricted" Pod Security Standard
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 101
+    seccompProfile:
+      type: RuntimeDefault
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+      add:
+        - NET_BIND_SERVICE
