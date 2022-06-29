@@ -36,6 +36,8 @@ helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx --create
 ```
 
 ## Pod Security Standard
+NOT CURRENTLY WORKING: THE ADMISSION WEBHOOK WON'T RUN. CURRENTLY RUNNING IN BASELINE.
+
 After verifying the ingress controller works as expected, you can apply the restricted Pod Security Standard to the namespace.
 ```
 kubectl label --dry-run=server --overwrite ns ingress-nginx pod-security.kubernetes.io/enforce=restricted
