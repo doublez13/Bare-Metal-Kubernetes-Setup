@@ -82,10 +82,11 @@ Add the [Kubernetes repo](https://kubernetes.io/docs/setup/production-environmen
     1. `kubeadm init --config provision.yaml --upload-certs`
     2. Copy the kubeconfig to the correct user account
     3. Install a network addon, paying attention to Network Policy support. Calico is a good option:
-       1. Download the manifest: `curl https://docs.projectcalico.org/manifests/calico.yaml -O`
-       2. Customize if necessary
-       3. Apply the manifest: `kubectl apply -f calico.yaml`
-       4. [Install calicoctl](https://docs.projectcalico.org/getting-started/clis/calicoctl/install)
+       1. Install the Operator: `kubectl create -f https://projectcalico.docs.tigera.io/manifests/tigera-operator.yaml`
+       2. Download the custom resources: `curl https://projectcalico.docs.tigera.io/manifests/custom-resources.yaml -O`
+       3. Customize if necessary
+       4. Create the manifest: `kubectl create -f custom-resources.yaml` 
+       5. [Install calicoctl](https://docs.projectcalico.org/getting-started/clis/calicoctl/install)
     4. Approve the kubelet CSRs for the new nodes.
        1. `kubectl get csr`
        2. `kubectl certificate approve <name>`
