@@ -23,4 +23,19 @@ rules:
     verbs: ['*']
 ```
 ### Create a Role Binding for the Service Account
+```
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: wordpress-admin
+  namespace: wordpress
+subjects:
+  - kind: ServiceAccount
+    name: wordpress-admin
+    namespace: wordpress
+roleRef:
+  kind: Role
+  name: wordpress-admin
+  apiGroup: rbac.authorization.k8s.io
+```
 ### Generate Kubeconfig File
