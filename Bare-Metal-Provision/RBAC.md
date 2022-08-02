@@ -11,5 +11,16 @@ metadata:
 ```
 
 ### Create A Role
+```
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: wordpress-admin
+  namespace: wordpress
+rules:
+  - apiGroups: ['*']
+    resources: ['*']
+    verbs: ['*']
+```
 ### Create a Role Binding for the Service Account
 ### Generate Kubeconfig File
