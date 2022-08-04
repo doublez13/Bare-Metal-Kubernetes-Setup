@@ -2,6 +2,7 @@
 This example shows how to generate a kubeconfig file with access to only one namespace. We use the wordpress namespaces as an example.
 
 ## User Account Method
+Instructions found here: https://cloudhero.io/creating-users-for-your-kubernetes-cluster
 
 ## Service Account Method (Not Recommended)
 ### Create A Service Account
