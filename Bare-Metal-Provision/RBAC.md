@@ -1,6 +1,8 @@
 # Kubernetes Role Based Access Control
 This example shows how to generate a kubeconfig file with access to only one namespace. We use the wordpress namespaces as an example.
 
+## Service Account Method (Not Recommended)
+
 ### Create A Service Account
 ```
 apiVersion: v1
