@@ -4,6 +4,36 @@ This example shows how to generate a kubeconfig file with access to only one nam
 ## User Account Method
 Instructions found here: https://cloudhero.io/creating-users-for-your-kubernetes-cluster
 
+### Create A Role
+```
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: wordpress-admin
+  namespace: wordpress
+rules:
+  - apiGroups: ['*']
+    resources: ['*']
+    verbs: ['*']
+```
+### Create a Role Binding for the User Account
+```
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: wordpress-admin
+  namespace: wordpress
+subjects:
+  - kind: user
+    name: wordpress-admin
+    namespace: wordpress
+roleRef:
+  kind: Role
+  name: wordpress-admin
+  apiGroup: rbac.authorization.k8s.io
+```
+
+
 ## Service Account Method (Not Recommended)
 ### Create A Service Account
 ```
