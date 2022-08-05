@@ -54,3 +54,10 @@ roleRef:
   name: wordpress-admin
   apiGroup: rbac.authorization.k8s.io
 ```
+### Export the Config
+```
+kubectl config set-cluster kubernetes --server=$APISERVER --kubeconfig=myuser.kubeconfig
+kubectl config set-credentials myser --client-certificate=user.crt --client-key=user.key --embed-certs=true --kubeconfig=myuser.kubeconfig
+kubectl config set-context myuser --cluster=kubernetes --user=myser --namespace=wordpress --kubeconfig=myuser.kubeconfig
+kubectl use-context myuser
+```
