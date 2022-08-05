@@ -1,9 +1,10 @@
 # Kubernetes Role Based Access Control
 This example shows how to generate a kubeconfig file with access to only one namespace. We use the wordpress namespaces as an example.
+Docs found [here](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#create-certificatesigningrequest)
 
 ```
-openssl genrsa -out user.key 4096
-openssl req -new -key user.key -out user.csr -subj "/CN=user/O=group1/O=group2"
+openssl genrsa -out myuser.key 4096
+openssl req -new -key myuser.key -out myuser.csr -subj "/CN=myuser/O=group1/O=group2"
 ```
 ```
 apiVersion: certificates.k8s.io/v1
@@ -18,6 +19,11 @@ spec:
   - digital signature
   - key encipherment
   - client auth
+```
+```
+kubectl get csr
+kubectl certificate approve myuser
+kubectl get csr myuser -o jsonpath='{.status.certificate}'| base64 -d > myuser.crt
 ```
 
 ### Create A Role
