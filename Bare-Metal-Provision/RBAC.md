@@ -46,7 +46,7 @@ metadata:
   name: wordpress-admin
   namespace: wordpress
 subjects:
-  - kind: user
+  - kind: User
     name: wordpress-admin
     namespace: wordpress
 roleRef:
