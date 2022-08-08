@@ -32,7 +32,10 @@ affinity:
 ```
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
-helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx --create-namespace -f values.yaml 
+helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx --create-namespace -f values.yaml
+
+#To upgrade to the latest chart
+helm upgrade ingress-nginx ingress-nginx/ingress-nginx  -n ingress-nginx
 ```
 
 ## Pod Security Standard
