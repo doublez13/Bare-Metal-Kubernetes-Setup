@@ -24,19 +24,25 @@ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.4/confi
 ```
 
 ## Configuration
+New configuration for versions > 0.13
 ```
-#config.yml
-apiVersion: v1
-kind: ConfigMap
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
 metadata:
+  name: ingress-pool
   namespace: metallb-system
-  name: config
-data:
-  config: |
-    address-pools:
-    - name: default
-      protocol: layer2
-      addresses:
-      - EXETERNAL_INGRESS_IP(S)_GO_HERE
+spec:
+  addresses:
+  - EXETERNAL_INGRESS_IP(S)_GO_HERE
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: ingress-pool-l2-advertisement
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+  - ingress-pool
+
 ```
 `kubectl apply -f config.yaml`
