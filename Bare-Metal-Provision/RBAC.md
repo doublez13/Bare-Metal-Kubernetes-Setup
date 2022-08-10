@@ -12,7 +12,7 @@ kind: CertificateSigningRequest
 metadata:
   name: myuser
 spec:
-  request: $(cat user.csr | base64 | tr -d '\n')
+  request: $(cat myuser.csr | base64 | tr -d '\n')
   signerName: kubernetes.io/kube-apiserver-client
   expirationSeconds: 31536000  # one year
   usages:
