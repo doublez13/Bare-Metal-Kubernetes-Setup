@@ -60,5 +60,6 @@ kubectl config set-cluster kubernetes --server=$APISERVER --kubeconfig=myuser.ku
 kubectl config set-cluster kubernetes --embed-certs --certificate-authority=$PATH_TO_CA_FILE --kubeconfig=myuser.kubeconfig     #/etc/kubernetes/pki/ca.crt
 kubectl config set-credentials myser --client-certificate=user.crt --client-key=user.key --embed-certs=true --kubeconfig=myuser.kubeconfig
 kubectl config set-context myuser --cluster=kubernetes --user=myser --namespace=wordpress --kubeconfig=myuser.kubeconfig
-kubectl use-context myuser
+#Distribute kube config file to user
+kubectl config use-context myuser
 ```
