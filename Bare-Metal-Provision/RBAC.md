@@ -43,11 +43,11 @@ rules:
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: wordpress-admin
+  name: myuser-wordpress-admin-role-binding
   namespace: wordpress
 subjects:
   - kind: User
-    name: wordpress-admin
+    name: myuser
     namespace: wordpress
 roleRef:
   kind: Role
