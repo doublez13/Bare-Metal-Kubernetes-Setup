@@ -87,6 +87,7 @@ Add the [Kubernetes repo](https://kubernetes.io/docs/setup/production-environmen
        3. Customize if necessary
        4. Create the manifest: `kubectl create -f custom-resources.yaml` 
        5. [Install calicoctl](https://docs.projectcalico.org/getting-started/clis/calicoctl/install)
+       6. [Upgrading an operator-based install](https://docs.tigera.io/calico/3.25/operations/upgrading/kubernetes-upgrade#upgrading-an-installation-that-uses-the-operator)
     4. Approve the kubelet CSRs for the new nodes.
        1. `kubectl get csr`
        2. `kubectl certificate approve <name>`
