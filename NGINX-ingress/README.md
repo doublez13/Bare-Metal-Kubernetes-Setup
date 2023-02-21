@@ -80,6 +80,14 @@ kubectl get order
 kubectk get challenge
 ```
 
+## Upgrading
+Check out the [upgrade notes](https://cert-manager.io/docs/installation/upgrading/) for a particular target release.
+
+Apply the target manifest file.
+```
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/<version>/cert-manager.yaml
+```
+
 # Notes
 ## Session affinity:
 https://kubernetes.github.io/ingress-nginx/examples/affinity/cookie/
