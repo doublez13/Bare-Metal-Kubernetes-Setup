@@ -14,6 +14,7 @@ This section provisions a fresh Kubernetes cluster using [Kubeadm](https://kuber
    ```
 3. Install iptables/nftables and enable it to start on boot.
 4. (Optional) Enable Secure Boot and verify with `mokutil --sb-state`
+5. (Optional) Set journald max size with `sed -i 's/#SystemMaxUse=/SystemMaxUse=1G/' /etc/systemd/journald.conf`
 
 ## Install a container runtime
 As the [Dockershim CRI is now deprecated](https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/), containerd is a good choice to use.
