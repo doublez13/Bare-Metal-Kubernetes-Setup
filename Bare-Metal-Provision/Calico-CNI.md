@@ -31,6 +31,12 @@ spec:
       type: Calico
     type: Calico
 ```
+Which can also be verified using `calicoctl`
+```
+calicoctl get ipPool -o wide
+NAME                  CIDR             NAT    IPIPMODE   VXLANMODE     DISABLED   DISABLEBGPEXPORT   SELECTOR   
+default-ipv4-ippool   192.168.0.0/16   true   Never      CrossSubnet   false      false              all()      
+```
 
 
 ### Upgrading (Operator based)
