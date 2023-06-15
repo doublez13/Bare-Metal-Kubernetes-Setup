@@ -38,6 +38,8 @@ NAME                  CIDR             NAT    IPIPMODE   VXLANMODE     DISABLED 
 default-ipv4-ippool   192.168.0.0/16   true   Never      CrossSubnet   false      false              all()      
 ```
 
+It should be noted that although BGP is enabled, it is not being used. If all IpPools are using VXLan, BGP in calico can actually be disabled.
+
 
 ### Upgrading (Operator based)
 ```
