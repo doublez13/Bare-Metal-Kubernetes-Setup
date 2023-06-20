@@ -54,7 +54,7 @@ kubectl label --overwrite ns ingress-nginx pod-security.kubernetes.io/enforce-ve
 
 # Cert-Manager
 ```
-kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.8.1/cert-manager.yaml
+kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.12.2/cert-manager.yaml
 wget https://cert-manager.io/docs/tutorials/acme/example/production-issuer.yaml
 wget https://cert-manager.io/docs/tutorials/acme/example/staging-issuer.yaml
 ```
