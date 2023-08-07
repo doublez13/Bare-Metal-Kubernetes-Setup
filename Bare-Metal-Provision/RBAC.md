@@ -9,7 +9,7 @@ cd /tmp/RBAC
 openssl genrsa -out myuser.key 4096
 openssl req -new -key myuser.key -out myuser.csr -subj "/CN=myuser/O=group1/O=group2"
 ```
-NOTE: CN is the name of the user and O is the group that this user will belong to. 
+NOTE: CN is the name of the user and O is the group that this user will belong to. These groups can be referenced in the role binding.
 
 
 ```
