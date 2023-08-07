@@ -3,9 +3,15 @@ This example shows how to generate a kubeconfig file with access to only one nam
 Docs found [here](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#normal-user)
 
 ```
+mkdir /tmp/RBAC
+chmod 700 /tmp/RBAC
+cd /tmp/RBAC
 openssl genrsa -out myuser.key 4096
 openssl req -new -key myuser.key -out myuser.csr -subj "/CN=myuser/O=group1/O=group2"
 ```
+NOTE: CN is the name of the user and O is the group that this user will belong to. 
+
+
 ```
 apiVersion: certificates.k8s.io/v1
 kind: CertificateSigningRequest
