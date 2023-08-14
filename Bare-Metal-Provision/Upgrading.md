@@ -35,9 +35,9 @@ Kubernetes versions take the format Major.Minor.Patch (1.24.2)
        ```
     5. Upgrade Containerd
        ```
-       apt unhold containerd.io
+       apt-mark unhold containerd.io
        apt upgrade containerd.io
-       apt hold containerd.io
+       apt-mark hold containerd.io
        ``` 
     6. Uncordon the node
        ```
@@ -70,9 +70,9 @@ Kubernetes versions take the format Major.Minor.Patch (1.24.2)
        ```
     5. Upgrade Containerd
        ```
-       apt unhold containerd.io
+       apt-mark unhold containerd.io
        apt upgrade containerd.io
-       apt hold containerd.io
+       apt-mark hold containerd.io
        ``` 
     5. Uncordon the node
        ```
