@@ -33,7 +33,13 @@ Kubernetes versions take the format Major.Minor.Patch (1.24.2)
        systemctl daemon-reload
        systemctl restart kubelet
        ```
-    5. Uncordon the node
+    5. Upgrade Containerd
+       ```
+       apt unhold containerd.io
+       apt upgrade containerd.io
+       apt hold containerd.io
+       ``` 
+    6. Uncordon the node
        ```
        kubectl uncordon <node-to-drain>
        ```
@@ -62,6 +68,12 @@ Kubernetes versions take the format Major.Minor.Patch (1.24.2)
        systemctl daemon-reload
        systemctl restart kubelet
        ```
+    5. Upgrade Containerd
+       ```
+       apt unhold containerd.io
+       apt upgrade containerd.io
+       apt hold containerd.io
+       ``` 
     5. Uncordon the node
        ```
        kubectl uncordon <node-to-drain>
