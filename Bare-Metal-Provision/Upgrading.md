@@ -5,16 +5,17 @@ Kubernetes versions take the format Major.Minor.Patch (1.24.2)
 2. Upgrade each control plane node fully before moving to the next
     1. Upgrade kubeadm
        ```
+       #Change the kubernetes version in /etc/apt/sources.list.d/kubernetes.list
        apt-mark unhold kubeadm
        apt-get update
-       apt-get install -y kubeadm=1.24.x-00
+       apt-get upgrade -y kubeadm
        apt-mark hold kubeadm
        ```
     2. Upgrade node with kubeadm 
         1. On first control plan node upgrade only
            ```
            kubeadm upgrade plan
-           kubeadm upgrade apply v1.24.x
+           kubeadm upgrade apply v1.27.8
            ```
         2. On other control plan nodes only
            ```
@@ -46,9 +47,10 @@ Kubernetes versions take the format Major.Minor.Patch (1.24.2)
 3. Upgrade each worker node fully before moving to the next
     1. Upgrade kubeadm
        ```
+       #Change the kubernetes version in /etc/apt/sources.list.d/kubernetes.list
        apt-mark unhold kubeadm
        apt-get update
-       apt-get install -y kubeadm=1.24.x-00
+       apt-get upgrade -y kubeadm
        apt-mark hold kubeadm
        ```
     2. Upgrade node with kubeadm
