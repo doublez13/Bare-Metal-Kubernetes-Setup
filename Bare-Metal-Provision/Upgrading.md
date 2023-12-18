@@ -26,7 +26,7 @@ Kubernetes versions take the format Major.Minor.Patch (1.24.2)
        kubectl drain <node-to-drain> --ignore-daemonsets
        apt-mark unhold kubelet kubectl
        apt-get update
-       apt-get install -y kubelet kubectl
+       apt-get upgrade -y kubelet kubectl
        apt-mark hold kubelet kubectl
        ```
     4. Restart kubelet service
@@ -62,7 +62,7 @@ Kubernetes versions take the format Major.Minor.Patch (1.24.2)
        kubectl drain <node-to-drain> --ignore-daemonsets
        apt-mark unhold kubelet kubectl
        apt-get update
-       apt-get install -y kubelet kubectl
+       apt-get upgrade -y kubelet kubectl
        apt-mark hold kubelet kubectl
        ```
     4. Restart kubelet service
