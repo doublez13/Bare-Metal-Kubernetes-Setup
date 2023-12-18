@@ -1,5 +1,5 @@
 # Upgrading your Kubernetes Cluster
-Kubernetes versions take the format Major.Minor.Patch (1.24.2)
+Kubernetes versions take the format Major.Minor.Patch (1.27.8)
 
 1. Read the CHANGELOG file! Seriously
 2. Upgrade each control plane node fully before moving to the next
