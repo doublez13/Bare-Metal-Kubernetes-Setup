@@ -37,6 +37,10 @@ helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx --create
 #To upgrade to the latest chart
 helm repo update
 helm upgrade ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx
+
+#To revert to a prior release
+helm history ingress-nginx -n ingress-nginx
+helm rollback helm history ingress-nginx -n ingress-nginx 0
 ```
 
 ## Pod Security Standard
