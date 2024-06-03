@@ -14,8 +14,8 @@ Kubernetes versions take the format Major.Minor.Patch (1.27.8)
     2. Upgrade node with kubeadm 
         1. On first control plan node upgrade only
            ```
-           kubeadm upgrade plan
-           kubeadm upgrade apply v1.27.8
+           kubeadm upgrade plan v1.28.10
+           kubeadm upgrade apply v1.28.10
            ```
         2. On other control plan nodes only
            ```
