@@ -59,7 +59,7 @@ Kubernetes versions take the format Major.Minor.Patch (1.27.8)
        ```
     3. Upgrade kubelet and kubectl
        ```
-       kubectl drain <node-to-drain> --ignore-daemonsets
+       kubectl drain <node-to-drain> --ignore-daemonsets --delete-emptydir-data
        apt-mark unhold kubelet kubectl
        apt-get update
        apt-get upgrade -y kubelet kubectl
