@@ -38,6 +38,10 @@ helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx --create
 helm repo update
 helm upgrade ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx
 
+#To upgrade to a specific chart
+helm repo update
+helm upgrade ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx --version 4.10.3
+
 #To revert to a prior release
 helm history ingress-nginx -n ingress-nginx
 helm rollback helm history ingress-nginx -n ingress-nginx 0
