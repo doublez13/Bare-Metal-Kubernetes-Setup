@@ -96,6 +96,9 @@ Apply the target manifest file.
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/<version>/cert-manager.yaml
 ```
 
+## Verifying the Installation
+https://cert-manager.io/docs/installation/kubectl/#verify
+
 # Notes
 ## Session affinity:
 https://kubernetes.github.io/ingress-nginx/examples/affinity/cookie/
