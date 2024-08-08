@@ -19,9 +19,9 @@ NOTE: CN is the name of the user and O is the group that this user will belong t
 apiVersion: certificates.k8s.io/v1
 kind: CertificateSigningRequest
 metadata:
-  name: myuser
+  name: $USER
 spec:
-  request: $(cat myuser.csr | base64 | tr -d '\n')
+  request: $(cat $USER.csr | base64 | tr -d '\n')
   signerName: kubernetes.io/kube-apiserver-client
   expirationSeconds: 31536000  # one year
   usages:
@@ -31,8 +31,8 @@ spec:
 ```
 ```
 kubectl get csr
-kubectl certificate approve myuser
-kubectl get csr myuser -o jsonpath='{.status.certificate}'| base64 -d > myuser.crt
+kubectl certificate approve $USER
+kubectl get csr $USER -o jsonpath='{.status.certificate}'| base64 -d > $USER.crt
 ```
 
 ### Create A Role
@@ -52,11 +52,11 @@ rules:
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: myuser-wordpress-admin-role-binding
+  name: $USER-wordpress-admin-role-binding
   namespace: wordpress
 subjects:
   - kind: User
-    name: myuser
+    name: $USER
     namespace: wordpress
 roleRef:
   kind: Role
@@ -65,11 +65,11 @@ roleRef:
 ```
 ### Export the Config
 ```
-kubectl config set-cluster kubernetes --server=$APISERVER --kubeconfig=myuser.kubeconfig
+kubectl config set-cluster kubernetes --server=$APISERVER --kubeconfig=$USER.kubeconfig
 kubectl get cm kube-root-ca.crt -o jsonpath="{['data']['ca\.crt']}" >> ca.crt
-kubectl config set-cluster kubernetes --embed-certs --certificate-authority=ca.crt --kubeconfig=myuser.kubeconfig
-kubectl config set-credentials myser --client-certificate=myuser.crt --client-key=user.key --embed-certs=true --kubeconfig=myuser.kubeconfig
-kubectl config set-context myuser --cluster=kubernetes --user=myser --namespace=wordpress --kubeconfig=myuser.kubeconfig
+kubectl config set-cluster kubernetes --embed-certs --certificate-authority=ca.crt --kubeconfig=$USER.kubeconfig
+kubectl config set-credentials $USER --client-certificate=$USER.crt --client-key=$USER.key --embed-certs=true --kubeconfig=$USER.kubeconfig
+kubectl config set-context $USER --cluster=kubernetes --user=myser --namespace=wordpress --kubeconfig=$USER.kubeconfig
 #Distribute kube config file to user
-kubectl config use-context myuser
+kubectl config use-context $USER
 ```
