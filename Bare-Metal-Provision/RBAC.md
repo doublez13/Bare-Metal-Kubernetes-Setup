@@ -16,6 +16,8 @@ NOTE: CN is the name of the user and O is the group that this user will belong t
 
 
 ```
+cat << EOF > $USER-csr.yaml
+
 apiVersion: certificates.k8s.io/v1
 kind: CertificateSigningRequest
 metadata:
@@ -28,11 +30,15 @@ spec:
   - digital signature
   - key encipherment
   - client auth
+
+EOF
 ```
+
 ```
 kubectl get csr
 kubectl certificate approve $USER
 kubectl get csr $USER -o jsonpath='{.status.certificate}'| base64 -d > $USER.crt
+rm $USER.csr
 ```
 
 ### Create A Role
@@ -68,8 +74,8 @@ roleRef:
 kubectl config set-cluster kubernetes --server=$APISERVER --kubeconfig=$USER.kubeconfig
 kubectl get cm kube-root-ca.crt -o jsonpath="{['data']['ca\.crt']}" >> ca.crt
 kubectl config set-cluster kubernetes --embed-certs --certificate-authority=ca.crt --kubeconfig=$USER.kubeconfig
+kubectl config set-context $USER --cluster=kubernetes --user=$USER --namespace=wordpress --kubeconfig=$USER.kubeconfig
 kubectl config set-credentials $USER --client-certificate=$USER.crt --client-key=$USER.key --embed-certs=true --kubeconfig=$USER.kubeconfig
-kubectl config set-context $USER --cluster=kubernetes --user=myser --namespace=wordpress --kubeconfig=$USER.kubeconfig
 #Distribute kube config file to user
 kubectl config use-context $USER
 ```
