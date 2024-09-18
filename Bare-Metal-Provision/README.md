@@ -34,16 +34,37 @@ As the [Dockershim CRI is now deprecated](https://kubernetes.io/blog/2020/12/02/
         ```
         Starting with containerd 1.5, the cgroup driver and version can be verified as follows. A bug in versions < 1.5 produces the wrong output. The `crictl` command will be available after installing the Kubernetes packages.
         ```
-        # crictl info | grep -B8 SystemdCgroup
+        # crictl -r unix:///run/containerd/containerd.sock info | grep runtimes -A 29
         "runtimes": {
-        "runc": {
-          "runtimeType": "io.containerd.runc.v2",
-          "runtimeEngine": "",
-          "PodAnnotations": null,
-          "ContainerAnnotations": null,
-          "runtimeRoot": "",
-          "options": {
-            "SystemdCgroup": true
+          "runc": {
+            "runtimeType": "io.containerd.runc.v2",
+            "runtimePath": "",
+            "runtimeEngine": "",
+            "PodAnnotations": [],
+            "ContainerAnnotations": [],
+            "runtimeRoot": "",
+            "options": {
+              "BinaryName": "",
+              "CriuImagePath": "",
+              "CriuPath": "",
+              "CriuWorkPath": "",
+              "IoGid": 0,
+              "IoUid": 0,
+              "NoNewKeyring": false,
+              "NoPivotRoot": false,
+              "Root": "",
+              "ShimCgroup": "",
+              "SystemdCgroup": true
+            },
+            "privileged_without_host_devices": false,
+            "privileged_without_host_devices_all_devices_allowed": false,
+            "baseRuntimeSpec": "",
+            "cniConfDir": "",
+            "cniMaxConfNum": 0,
+            "snapshotter": "",
+            "sandboxMode": "podsandbox"
+          }
+        },
         ```
 
 ## Make sure the required modules load on boot
