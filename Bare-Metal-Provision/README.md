@@ -2,19 +2,47 @@
 
 This section provisions a fresh Kubernetes cluster using [Kubeadm](https://kubernetes.io/docs/reference/setup-tools/kubeadm/). These steps should work fine on both Debian and RedHat based distros. This configuration assumes you already have an HA-API configured, as discussed in the [previous section](../HA-API/).
 
-## Prerequisites
-1. Disable swap
-    1. Remove swap references from /etc/fstab 
-    2. Reboot, or deactive the active swap with `swapoff -a` 
+## Optional
+1. Enable NTP: `systemctl enable --now systemd-timesyncd`
 2. Disable IPv6 if you're not using it. It just makes things easier to toubleshoot in my opinion.  
    Append the following lines to `/etc/sysctl.conf`
    ```
     net.ipv6.conf.all.disable_ipv6 = 1
     net.ipv6.conf.default.disable_ipv6 = 1
    ```
-3. Install iptables/nftables and enable it to start on boot.
-4. (Optional) Enable Secure Boot and verify with `mokutil --sb-state`
-5. (Optional) Set journald max size with `sed -i 's/#SystemMaxUse=/SystemMaxUse=1G/' /etc/systemd/journald.conf`
+3. Enable Secure Boot
+    1. Verify secure boot is enabled: `mokutil --sb-state`
+    2. Verify lockdown is integrity: `cat /sys/kernel/security/lockdown`
+4. Set journald max size with `sed -i 's/#SystemMaxUse=/SystemMaxUse=1G/' /etc/systemd/journald.conf`
+5. Network redundancy (note that bond-mode 4 is LACP and requires switch config as well)
+   ```
+   #apt install ifenslave
+   #cat /etc/network/interfaces
+   
+   auto eno1
+   iface eno1 inet manual
+        bond-master bond0
+        bond-mode 4
+   auto eno2
+   iface eno2 inet manual
+        bond-master bond0
+        bond-mode 4
+
+   auto bond0
+   iface bond0 inet static
+        bond-slaves eno1 eno2
+        bond-mode 4
+        address ADDRESS/MASK
+        gateway GATEWAY
+        dns-nameservers DNS_SERVERS
+        dns-search DNS_SEARCH_DOMAINS
+   ``` 
+
+## Prerequisites
+1. Disable swap
+    1. Remove swap references from /etc/fstab 
+    2. Reboot, or deactive the active swap with `swapoff -a` 
+2. Install iptables/nftables and enable it to start on boot.
 
 ## Install a container runtime
 As the [Dockershim CRI is now deprecated](https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/), containerd is a good choice to use.
