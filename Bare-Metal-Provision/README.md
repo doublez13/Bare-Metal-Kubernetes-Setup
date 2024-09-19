@@ -42,7 +42,8 @@ This section provisions a fresh Kubernetes cluster using [Kubeadm](https://kuber
 1. Disable swap
     1. Remove swap references from /etc/fstab 
     2. Reboot, or deactive the active swap with `swapoff -a` 
-2. Install iptables/nftables and enable it to start on boot.
+2. Install iptables/nftables and enable it to start on boot
+    1. `systemctl enable nftables --now`
 
 ## Install a container runtime
 As the [Dockershim CRI is now deprecated](https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/), containerd is a good choice to use.
