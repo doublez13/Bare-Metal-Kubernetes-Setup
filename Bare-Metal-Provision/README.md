@@ -5,16 +5,21 @@ This section provisions a fresh Kubernetes cluster using [Kubeadm](https://kuber
 ## Optional
 1. Enable NTP: `systemctl enable --now systemd-timesyncd`
 2. Disable IPv6 if you're not using it. It just makes things easier to toubleshoot in my opinion.  
-   Append the following lines to `/etc/sysctl.conf`
+   Append the following lines to `/etc/sysctl.d/k8s.conf`
    ```
     net.ipv6.conf.all.disable_ipv6 = 1
     net.ipv6.conf.default.disable_ipv6 = 1
    ```
-3. Enable Secure Boot
+3. Bump inotify limits.  
+   Append the following lines to `/etc/sysctl.d/k8s.conf`
+   ```
+    fs.inotify.max_user_instances=1024
+   ```
+4. Enable Secure Boot.
     1. Verify secure boot is enabled: `mokutil --sb-state`
     2. Verify lockdown is integrity: `cat /sys/kernel/security/lockdown`
-4. Set journald max size with `sed -i 's/#SystemMaxUse=/SystemMaxUse=1G/' /etc/systemd/journald.conf`
-5. Network redundancy (note that bond-mode 4 is LACP and requires switch config as well)
+5. Set journald max size with `sed -i 's/#SystemMaxUse=/SystemMaxUse=1G/' /etc/systemd/journald.conf`
+6. Network redundancy (note that bond-mode 4 is LACP and requires switch config as well)
    ```
    #apt install ifenslave
    #cat /etc/network/interfaces
@@ -104,7 +109,7 @@ br_netfilter
 ```
 
 ## Set sysctl parameters
-Add the following parameters to a conf file in `/etc/sysctl.d`. Ex: `/etc/sysctl.d/99-k8s.conf`
+Append the following lines to `/etc/sysctl.d/k8s.conf`
 ```
 net.bridge.bridge-nf-call-iptables  = 1
 net.ipv4.ip_forward                 = 1
