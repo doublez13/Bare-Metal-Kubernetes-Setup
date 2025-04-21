@@ -44,7 +44,7 @@ helm upgrade ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx --versio
 
 #To revert to a prior release
 helm history ingress-nginx -n ingress-nginx
-helm rollback helm history ingress-nginx -n ingress-nginx 0
+helm rollback ingress-nginx -n ingress-nginx REVISION_NUMBER_HERE
 ```
 
 ## Pod Security Standard
